@@ -21,7 +21,10 @@ def sent_analyzer():
     response = sentiment_analyzer(text_to_analyze)
     label = response['label']
     score = response['score']
-    if label is None:
+    error = response['error']
+    if error == 'empty':
+        return "Empty input! Write something."
+    elif label is None:
         return "Invalid input! Try again."
     return 'The given text has been identified as ' \
          + label.split('_')[1] + ' with a score of ' + str(score)
